@@ -11,7 +11,7 @@ import { ApiCreatedResponse, ApiOkResponse, ApiNotFoundResponse, ApiBadRequestRe
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 @Controller('roles')
 export class RoleController {
-  constructor(private readonly roleService: RoleService) {}
+  constructor(private readonly roleService: RoleService) { }
 
   @ApiCreatedResponse({ type: ResponseRoleDto })
   @ApiBadRequestResponse({ description: 'Rol duplicado o datos inválidos' })
@@ -23,7 +23,7 @@ export class RoleController {
   @Roles('admin')
   @ApiOkResponse({ type: ResponseRoleDto, isArray: true })
   @Get()
-  findAll(): Promise<ResponseRoleDto[]> {
+  findAll() {
     return this.roleService.findAll();
   }
 

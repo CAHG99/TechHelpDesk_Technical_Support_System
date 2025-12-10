@@ -1,13 +1,13 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum } from 'class-validator';
-import { TicketStatus } from '../entities/ticket.entity';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEnum } from "class-validator";
+import { TicketStatus } from "../entities/ticket.entity";
 
 export class UpdateTicketStatusDto {
   @ApiProperty({
     enum: TicketStatus,
-    description: 'Nuevo estado del ticket',
+    description: "Nuevo estado del ticket",
     example: TicketStatus.IN_PROGRESS,
   })
-  @IsEnum(TicketStatus, { message: 'Estado inválido' })
+  @IsEnum(TicketStatus, { message: "Estado inválido" })
   status: TicketStatus;
 }

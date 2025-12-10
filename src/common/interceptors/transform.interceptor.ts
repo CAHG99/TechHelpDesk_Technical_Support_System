@@ -3,15 +3,15 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
-} from '@nestjs/common';
-import { Observable, map } from 'rxjs';
-import { plainToInstance } from 'class-transformer';
+} from "@nestjs/common";
+import { Observable, map } from "rxjs";
+import { plainToInstance } from "class-transformer";
 
 @Injectable()
 export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const handler = context.getHandler();
-    const responseDto = Reflect.getMetadata('responseDto', handler);
+    const responseDto = Reflect.getMetadata("responseDto", handler);
 
     return next.handle().pipe(
       map((data) => {

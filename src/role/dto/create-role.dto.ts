@@ -1,5 +1,5 @@
 // src/role/dto/create-role.dto.ts
-import { IsString, MaxLength, MinLength } from 'class-validator';
+import { IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateRoleDto {
   @IsString()

@@ -1,4 +1,4 @@
-import { Expose, Transform } from 'class-transformer';
+import { Expose, Transform } from "class-transformer";
 
 export class ResponseTicketDto {
   @Expose()
@@ -38,13 +38,13 @@ export class ResponseTicketDto {
 
   @Expose()
   @Transform(({ value }) =>
-    value ? new Date(value).toLocaleDateString('es-CO') : null,
+    value ? new Date(value).toLocaleDateString("es-CO") : null,
   )
   createdAt: string;
 
   @Expose()
   @Transform(({ value }) =>
-    value ? new Date(value).toLocaleDateString('es-CO') : null,
+    value ? new Date(value).toLocaleDateString("es-CO") : null,
   )
   updatedAt: string;
 }

@@ -1,40 +1,54 @@
-import { Role } from 'src/role/entities/role.entity';
-import { Ticket } from '../../ticket/entities/ticket.entity';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Role } from "src/role/entities/role.entity";
+import { Ticket } from "../../ticket/entities/ticket.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  Index,
+} from "typeorm";
 
 @Entity()
+@Index(['email'])   // Para búsquedas por email (login)
+@Index(['roleId'])  // Para filtrar usuarios por rol
+@Index(['isActive']) // Para filtrar usuarios activos
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({length:100 })
-    name: string;
+  @Column({ length: 100 })
+  name: string;
 
-    @Column({ unique: true})
-    email: string;
+  @Column({ unique: true })
+  email: string;
 
-    @Column({ length: 100 })
-    password: string;
+  @Column({ length: 100 })
+  password: string;
 
-    @Column({ default: true })
-    isActive: boolean;
+  @Column({ default: true })
+  isActive: boolean;
 
-    @Column()
-    roleId: number;
+  @Column()
+  roleId: number;
 
-    @ManyToOne(() => Role, (role) => role.users, { eager: true })
-    @JoinColumn({ name: 'roleId' })
-    role: Role;
+  @ManyToOne(() => Role, (role) => role.users, { eager: true })
+  @JoinColumn({ name: "roleId" })
+  role: Role;
 
-    @OneToMany(() => Ticket, ticket => ticket.customer)
-    ticketsCreated: Ticket[];
+  @OneToMany(() => Ticket, (ticket) => ticket.customer)
+  ticketsCreated: Ticket[];
 
-    @OneToMany(() => Ticket, ticket => ticket.technician)
-    ticketsAssigned: Ticket[];
+  @OneToMany(() => Ticket, (ticket) => ticket.technician)
+  ticketsAssigned: Ticket[];
 
-    @CreateDateColumn()
-    createdAt:Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt:Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

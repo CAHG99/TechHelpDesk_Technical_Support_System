@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeepPartial } from 'typeorm';
 import { Ticket, TicketStatus, TicketPriority } from './entities/ticket.entity';
@@ -13,6 +13,8 @@ import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class TicketService {
+  private readonly logger = new Logger(TicketService.name);
+
   constructor(
     @InjectRepository(Ticket)
     private readonly ticketRepo: Repository<Ticket>,
@@ -28,7 +30,7 @@ export class TicketService {
 
     @InjectRepository(Technician)
     private readonly technicianRepo: Repository<Technician>,
-  ) {}
+  ) { }
 
   // Valid transition map for ticket statuses
   private readonly validTransitions: Record<TicketStatus, TicketStatus[]> = {
@@ -158,9 +160,24 @@ export class TicketService {
     return plainToInstance(ResponseTicketDto, ticket, { excludeExtraneousValues: true });
   }
 
-  // Get a list of all tickets
-  async findAll(): Promise<ResponseTicketDto[]> {
-    const tickets = await this.ticketRepo.find();
-    return plainToInstance(ResponseTicketDto, tickets, { excludeExtraneousValues: true });
+  // Get a list of all tickets with pagination
+  async findAll(paginationDto?: { limit?: number; offset?: number }): Promise<{ data: ResponseTicketDto[]; total: number; limit: number; offset: number; hasMore: boolean }> {
+    const { limit = 10, offset = 0 } = paginationDto || {};
+
+    const [tickets, total] = await this.ticketRepo.findAndCount({
+      take: limit,
+      skip: offset,
+      order: { createdAt: 'DESC' },
+    });
+
+    const data = plainToInstance(ResponseTicketDto, tickets, { excludeExtraneousValues: true });
+
+    return {
+      data,
+      total,
+      limit,
+      offset,
+      hasMore: offset + data.length < total,
+    };
   }
 }

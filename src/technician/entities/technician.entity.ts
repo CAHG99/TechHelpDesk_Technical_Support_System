@@ -1,9 +1,16 @@
-import { Ticket } from '../../ticket/entities/ticket.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Ticket } from "../../ticket/entities/ticket.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
-@Entity('technicians')
+@Entity("technicians")
 export class Technician {
-  @PrimaryGeneratedColumn() 
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -15,10 +22,10 @@ export class Technician {
   @Column()
   availability: boolean;
 
-  @Column({default: true})
+  @Column({ default: true })
   isActive: boolean;
 
-  @OneToMany(() => Ticket, ticket => ticket.technicianExternal)
+  @OneToMany(() => Ticket, (ticket) => ticket.technicianExternal)
   tickets: Ticket[];
 
   @CreateDateColumn()
@@ -27,4 +34,3 @@ export class Technician {
   @UpdateDateColumn()
   updatedAt: Date;
 }
-

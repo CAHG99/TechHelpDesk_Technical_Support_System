@@ -1,9 +1,16 @@
-import { Ticket } from '../../ticket/entities/ticket.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Ticket } from "../../ticket/entities/ticket.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
-@Entity('clients')
+@Entity("clients")
 export class Client {
-  @PrimaryGeneratedColumn() 
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -18,7 +25,7 @@ export class Client {
   @Column()
   isActive: boolean;
 
-  @OneToMany(() => Ticket, ticket => ticket.client)
+  @OneToMany(() => Ticket, (ticket) => ticket.client)
   tickets: Ticket[];
 
   @CreateDateColumn()
@@ -27,4 +34,3 @@ export class Client {
   @UpdateDateColumn()
   updatedAt: Date;
 }
-

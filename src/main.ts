@@ -1,11 +1,11 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ConfigService } from '@nestjs/config';
-import helmet from 'helmet';
-import { HttpExceptionFilter } from './common/filters/http-exception.filter';
-import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import { ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { ConfigService } from "@nestjs/config";
+import helmet from "helmet";
+import { HttpExceptionFilter } from "./common/filters/http-exception.filter";
+import { TransformInterceptor } from "./common/interceptors/transform.interceptor";
 
 async function bootstrap() {
   // Create the NestJS application instance using the AppModule
@@ -18,7 +18,7 @@ async function bootstrap() {
   app.enableCors();
 
   // Set a global API prefix for all routes (e.g., /api/v1)
-  app.setGlobalPrefix('api/v1');
+  app.setGlobalPrefix("api/v1");
 
   // Global validation for incoming requests
   // This ensures all DTOs are validated based on the defined validation rules
@@ -38,18 +38,18 @@ async function bootstrap() {
 
   // Swagger configuration - Sets up API documentation using Swagger
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('API Usuarios') // Set API documentation title
-    .setDescription('Documentación de la API de usuarios') // Set description
-    .setVersion('1.0') // Set version number
+    .setTitle("API Usuarios") // Set API documentation title
+    .setDescription("Documentación de la API de usuarios") // Set description
+    .setVersion("1.0") // Set version number
     .addBearerAuth(
       {
-        type: 'http', // Use HTTP bearer authentication
-        scheme: 'bearer', // Bearer scheme for authorization
-        bearerFormat: 'JWT', // JWT token format
-        name: 'Authorization', // Header name
-        in: 'header', // Location of the token (header)
+        type: "http", // Use HTTP bearer authentication
+        scheme: "bearer", // Bearer scheme for authorization
+        bearerFormat: "JWT", // JWT token format
+        name: "Authorization", // Header name
+        in: "header", // Location of the token (header)
       },
-      'access-token', // Bearer token key in the Swagger docs
+      "access-token", // Bearer token key in the Swagger docs
     )
     .build();
 
@@ -57,11 +57,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
 
   // Set up Swagger UI at /api/docs route
-  SwaggerModule.setup('api/docs', app, document);
+  SwaggerModule.setup("api/docs", app, document);
 
   // Fetch the application port from configuration or use 3000 as default
   const config = app.get(ConfigService);
-  const port = config.get<number>('appPort') || 3000;
+  const port = config.get<number>("appPort") || 3000;
 
   // Start the application server
   await app.listen(port);

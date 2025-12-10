@@ -1,4 +1,4 @@
-import { IsString, MaxLength, MinLength, IsBoolean} from "class-validator";
+import { IsString, MaxLength, MinLength, IsBoolean } from "class-validator";
 
 export class CreateTechnicianDto {
   @IsString()

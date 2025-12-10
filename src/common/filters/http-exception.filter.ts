@@ -4,11 +4,14 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
-} from '@nestjs/common';
-import { Request, Response } from 'express';
+  Logger,
+} from "@nestjs/common";
+import { Request, Response } from "express";
 
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
+  private readonly logger = new Logger(HttpExceptionFilter.name);
+
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -36,7 +39,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
           : (message as any).message || message,
     };
 
-    console.error('🔥 Error capturado:', exception);
+    this.logger.error(
+      `${request.method} ${request.url} - Status: ${status}`,
+      exception instanceof Error ? exception.stack : JSON.stringify(exception),
+    );
 
     response.status(status).json(errorResponse);
   }

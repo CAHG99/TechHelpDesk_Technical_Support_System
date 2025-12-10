@@ -34,7 +34,6 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @ApiBody({ type: ResponseUserDto })
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @ApiOkResponse({ type: ResponseUserDto })
   @ApiNotFoundResponse({ description: 'Usuario no encontrado' })

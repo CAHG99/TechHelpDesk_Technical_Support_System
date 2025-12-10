@@ -12,14 +12,14 @@ export class RolesGuard implements CanActivate {
 
     const user = context.switchToHttp().getRequest().user;
 
-    if (!user) throw new ForbiddenException('Token inválido');
-    if (!user.role) throw new ForbiddenException('Token sin rol');
+    if (!user) throw new ForbiddenException('Invalid token');
+    if (!user.role) throw new ForbiddenException('Roleless token');
 
     const userRole = (typeof user.role === 'string' ? user.role : user.role.name).toLowerCase();
     const normalizedRequired = requiredRoles.map(r => r.toLowerCase());
 
     if (!normalizedRequired.includes(userRole)) {
-      throw new ForbiddenException('No tienes permisos');
+      throw new ForbiddenException("You don't have permissions");
     }
 
     return true;

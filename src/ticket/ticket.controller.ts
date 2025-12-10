@@ -17,7 +17,7 @@ import { Roles } from '../common/decorators/roles.decorator';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Tickets') // Swagger tag for grouping ticket-related endpoints
-@ApiBearerAuth() // Adds Bearer token authentication to the API
+@ApiBearerAuth('access-token') // Adds Bearer token authentication to the API
 @UseGuards(AuthGuard('jwt'), RolesGuard) // Protect routes with JWT and Role Guards
 @Controller('tickets')
 export class TicketController {

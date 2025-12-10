@@ -155,6 +155,10 @@ DB_NAME=
 
 JWT_SECRET=
 JWT_EXPIRATION=
+JWT_REFRESH_SECRET=
+JWT_REFRESH_EXPIRES_IN=
+
+PORT=
 `````
 
 ## Compile and run the project

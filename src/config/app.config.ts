@@ -13,7 +13,7 @@ export const EnvConfiguration = () => ({
     database: process.env.DB_NAME,
 
     // Automatically sync entities with database schema.
-    synchronize: false,
+    synchronize: true,
 
     // Automatically load all entities registered in modules.
     autoLoadEntities: true,

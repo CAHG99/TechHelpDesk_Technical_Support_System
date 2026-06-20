@@ -22,37 +22,17 @@
 [![Open Collective Sponsors](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 # 🛠️ TechHelpDesk – Technical Support System
-REST API built with **NestJS**, **TypeORM**, **PostgreSQL**, **JWT** and **Swagger** for managing the technical support ticket lifecycle.
-
----
-
-## 👤Author
-**Name:** _César Hernández_
-**Clan:** _Manglar_
+REST API built with NestJS for managing the complete lifecycle of technical support tickets.
 
 ---
 
 ## 📌 Project Description
 
-TechHelpDesk is an API for managing technical support tickets.
+TechHelpDesk is a REST API that centralizes the management of technical support tickets.
 
-It allows users to register with different roles, create and assign tickets, validate statuses, and view histories, ensuring traceability and access control.
+The system includes authentication, role-based access control, ticket assignment, status validation, and history tracking to ensure traceability throughout the support process.
 
 ---
-
-## 🎯 Objectives
-
-- Automate ticket management.
-
-- Implement authentication with JWT and role control.
-
-- Validate processes and state flow.
-
-- Provide documentation with Swagger.
-
-- Include unit tests with Jest.
-
---- ---
 
 ## 🚀 Technologies used
 
@@ -60,9 +40,9 @@ It allows users to register with different roles, create and assign tickets, val
 - NestJS
 - TypeORM
 - PostgreSQL
-- J.W.T.
--Swagger
--Jest
+- JWT
+- Swagger
+- Jest
 
 ---
 
@@ -103,7 +83,7 @@ src/
 
 - Inquiries by client or technician.
 
-### 🗂️ Persistence See More
+### 🗂️ Data Persistence
 - Entities: `User`, `Client`, `Technician`, `Category`, `Ticket`.
 
 - Seeders with initial data.
@@ -115,7 +95,7 @@ src/
 
 - Consistent error handling with exception filters.
 
-### 🔄Global Interceptor
+### 🔄 Global Interceptor
 - `TransformInterceptor` that formats each response:
 ```json
 {
@@ -124,12 +104,6 @@ src/
 "message": "Operation successful"
 }
 ```
-
-**Showing Off**
-
-Complete API documentation with examples.
-
-
 ---
 ## Project Setup
 
@@ -180,12 +154,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
-generar migracion
-npm run typeorm migration:run
-revertir  migraciones
-npm run typeorm migration:revert

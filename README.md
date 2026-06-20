@@ -113,21 +113,21 @@ http://localhost:3000/api/docs
 
 ---
 
-## Project Setup
+## Quick Start
 
-## Clone the Repository
+### Clone the repository
 ```bash
 git clone https://github.com/your_username/techhelpdesk.git
 cd techhelpdesk
 ```
 
-## Install Dependencies
+### Install dependencies
 
 ```bash
 $ npm install
 ```
 
-## Configure Environment Variables
+### Configure environment variables
 ```
 DB_HOST=
 DB_PORT=
@@ -139,7 +139,7 @@ JWT_SECRET=
 JWT_EXPIRATION=
 `````
 
-## Compile and run the project
+### Run the application
 
 ```bash
 # development
@@ -150,7 +150,7 @@ $ npm run start:dev
 
 ```
 
-## Run tests
+### Run tests
 
 ```bash
 # unit tests

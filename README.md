@@ -105,6 +105,14 @@ src/
 }
 ```
 ---
+## 📄 API Documentation
+
+Swagger documentation is available at:
+
+http://localhost:3000/api/docs
+
+---
+
 ## Project Setup
 
 ## Clone the Repository
